@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "name": "ESP-IDF",
+            "compilerPath": "/Users/admin/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/bin/xtensa-esp32-elf-gcc",
+            "compileCommands": "${workspaceFolder}/build/compile_commands.json",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-x64",
+            "includePath": [
+                "${workspaceFolder}/main",
+                "${workspaceFolder}/components/**",
+                "/Users/admin/.espressif/v6.0/esp-idf/components/**",
+                "/Users/admin/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp32-elf/include"
+            ],
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/main",
+                    "${workspaceFolder}/components",
+                    "/Users/admin/.espressif/v6.0/esp-idf/components",
+                    "/Users/admin/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp32-elf/include"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
+        }
+    ],
+    "version": 4
+}
