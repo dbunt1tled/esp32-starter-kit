@@ -27,67 +27,45 @@ static void IRAM_ATTR gpio_isr_handler(void *arg) {
     }
 }
 
-static void button_task(void *arg)
-{
+static void button_task(void *arg) {
     uint32_t notified;
-
     while (1) {
-
         xTaskNotifyWait(0, UINT32_MAX, &notified, pdMS_TO_TICKS(50));
-
         const int64_t now = esp_timer_get_time() / 1000;
-
-        for (int gpio = 0; gpio < 32; gpio++) {
-
+        for (int gpio = 0; gpio < MAX_GPIO; gpio++) {
             button_t *btn = buttons[gpio];
-            if (!btn)
+            if (!btn) {
                 continue;
-
+            }
             // check timeout single click
-            if (btn->waiting_double &&
-                now - btn->last_click_time > DOUBLE_CLICK_MS) {
-
+            if (btn->waiting_double && now - btn->last_click_time > DOUBLE_CLICK_MS) {
                 btn->waiting_double = false;
                 btn->cb(btn->gpio, BUTTON_EVENT_CLICK);
-                }
-
-            if (!(notified & (1UL << gpio)))
+            }
+            if (!(notified & (1UL << gpio))) {
                 continue;
-
-            if (now - btn->last_event_time < DEBOUNCE_MS)
+            }
+            if (now - btn->last_event_time < DEBOUNCE_MS) {
                 continue;
-
+            }
             btn->last_event_time = now;
-
             const int level = gpio_get_level(btn->gpio);
-
             if (level == 0) {
-
                 btn->press_time = now;
-
             } else {
-
                 const int duration = now - btn->press_time;
-
                 if (duration < LONG_PRESS_MS) {
-
                     if (btn->waiting_double &&
                         now - btn->last_click_time < DOUBLE_CLICK_MS) {
-
                         btn->waiting_double = false;
                         btn->cb(btn->gpio, BUTTON_EVENT_DOUBLE_CLICK);
-
-                        } else {
-
-                            btn->waiting_double = true;
-                            btn->last_click_time = now;
-                        }
-
+                    } else {
+                        btn->waiting_double = true;
+                        btn->last_click_time = now;
+                    }
                 } else {
-
                     btn->cb(btn->gpio, BUTTON_EVENT_LONG_PRESS);
                 }
-
                 btn->cb(btn->gpio, BUTTON_EVENT_RELEASE);
             }
         }
