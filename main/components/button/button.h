@@ -27,7 +27,7 @@ typedef struct {
     bool waiting_double;
 } button_t;
 
-void button_init(const gpio_num_t gpio, const button_callback_t cb);;
+void button_init(const gpio_num_t gpio, const button_callback_t cb);
 
 
 #endif //HELLO_WORLD_ESP_BUTTON_H

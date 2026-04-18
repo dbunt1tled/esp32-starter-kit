@@ -13,6 +13,7 @@ typedef enum {
     LED_CMD_OFF,
     LED_CMD_TOGGLE,
     LED_CMD_BLINK,
+    LED_CMD_FADE
 } led_cmd_t;
 
 void led_init(gpio_num_t gpio);

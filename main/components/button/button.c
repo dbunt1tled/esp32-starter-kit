@@ -9,7 +9,7 @@
 #include "esp_timer.h"
 
 #define MAX_GPIO 40
-#define DEBOUNCE_MS 40
+#define DEBOUNCE_MS 10
 #define LONG_PRESS_MS 800
 #define DOUBLE_CLICK_MS 400
 
@@ -73,6 +73,9 @@ static void button_task(void *arg) {
 }
 
 void button_init(const gpio_num_t gpio, const button_callback_t cb) {
+    if (gpio >= MAX_GPIO) {
+        return;
+    }
     button_t *btn = malloc(sizeof(button_t));
 
     btn->gpio = gpio;
@@ -85,6 +88,7 @@ void button_init(const gpio_num_t gpio, const button_callback_t cb) {
         .pin_bit_mask = (1ULL << gpio),
         .mode = GPIO_MODE_INPUT,
         .pull_up_en = GPIO_PULLUP_ENABLE,
+        .pull_down_en = GPIO_PULLDOWN_DISABLE,
         .intr_type = GPIO_INTR_ANYEDGE
     };
     gpio_config(&io);

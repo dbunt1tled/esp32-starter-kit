@@ -1,0 +1,42 @@
+//
+// Created by admin on 16.04.2026.
+//
+
+#ifndef HELLO_WORLD_ESP_BUS_H
+#define HELLO_WORLD_ESP_BUS_H
+#include "components/oled/oled.h"
+#include "driver/gpio.h"
+#include "components/wifi/wifi.h"
+
+typedef enum {
+    ACTION_PRINT,
+    ACTION_WIFI
+} bus_action_t;
+
+typedef struct {
+    int count;
+    int delay;
+} bus_cfg_t;
+
+typedef struct {
+    bus_action_t action;
+    union {
+        wifi_ev wifi_event;
+        gpio_num_t pin;
+        oled_msg_t oled;
+    } reg;
+
+    union {
+        int val;
+        char* text;
+    } value;
+
+} bus_msg_t;
+
+typedef void (*bus_handler_t)(const bus_msg_t *msg);
+
+void bus_init(bus_cfg_t *cfg);
+void bus_register(bus_action_t action, bus_handler_t handler);
+void bus_send(bus_msg_t msg);
+void bus_send_isr(bus_msg_t msg);
+#endif //HELLO_WORLD_ESP_BUS_H
