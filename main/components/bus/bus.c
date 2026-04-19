@@ -54,21 +54,21 @@ void bus_init(bus_cfg_t *cfg) {
         return;
     }
     bus_register(ACTION_PRINT, print_handler);
-    // bus_register(ACTION_WIFI, wifi_handler);
+    bus_register(ACTION_WIFI, wifi_handler);
     xTaskCreate(
         bus_consumer,
         "bus_task",
-        4096,
+        6144,
         cfg,
-        5,
+        7,
         &bus_task
     );
     xTaskCreate(
         bus_monitor,
         "bus_monitor",
-        2048,
+        1024,
         cfg,
-        5,
+        3,
         NULL
     );
     ESP_LOGI(BUS_TAG, "Queue created");
@@ -85,7 +85,7 @@ void bus_send(const bus_msg_t msg) {
     if (ok != pdTRUE) {
         ESP_LOGE(BUS_TAG, "Queue Full or Error");
     }
-    vTaskDelay(pdMS_TO_TICKS(2000));
+    vTaskDelay(pdMS_TO_TICKS(1000));
 }
 
 void bus_send_isr(const bus_msg_t msg) {

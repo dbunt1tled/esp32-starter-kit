@@ -7,5 +7,6 @@
 #include "components/bus/bus.h"
 
 void print_handler(const bus_msg_t *msg);
+void wifi_handler(const bus_msg_t *msg);
 
 #endif //HELLO_WORLD_ESP_HANDLERS_H

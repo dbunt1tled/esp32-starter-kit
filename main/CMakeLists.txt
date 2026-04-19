@@ -19,6 +19,9 @@ idf_component_register(SRCS
         "components/bus/bus.c"
         "components/bus/handlers/handlers.h"
         "components/bus/handlers/print_handler.c"
+        "components/bus/handlers/wifi_handler.c"
+        "components/nvs/nvs.h"
+        "components/nvs/nvs.c"
         INCLUDE_DIRS "."
         REQUIRES
         esp_driver_gpio
@@ -26,5 +29,10 @@ idf_component_register(SRCS
         esp_timer
         spi_flash
         esp_lcd
+        esp_netif
+        esp_event
+        esp_wifi
+        lwip
+        nvs_flash
 )
 target_compile_definitions(${COMPONENT_LIB} PRIVATE -DPROJECT_VER="${PROJECT_VER}")
