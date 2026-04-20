@@ -5,7 +5,6 @@
 #ifndef HELLO_WORLD_ESP_BUS_H
 #define HELLO_WORLD_ESP_BUS_H
 #include "components/oled/oled.h"
-#include "driver/gpio.h"
 #include "components/wifi/wifi.h"
 
 typedef enum {
@@ -22,10 +21,11 @@ typedef struct {
     bus_action_t action;
     union {
         wifi_ev wifi_event;
-        gpio_num_t pin;
         oled_msg_t oled;
     } reg;
-
+    union {
+        int flag;
+    } param;
     union {
         int val;
         char* text;

@@ -41,18 +41,15 @@ void wifi_handler(const bus_msg_t *msg) {
         case WIFI_EVENT_GOT_IP:
             static char buffer[32];
             snprintf(buffer, sizeof(buffer),"IP: %s", msg->value.text);
-            bus_msg_t m2 = {
+            const bus_msg_t m2 = {
                  .action = ACTION_PRINT,
                  .reg.oled = {
                      .type = OLED_BLOCK_TITLE,
                  },
+                .param.flag = 0,
                  .value.text = buffer,
              };
-
              bus_send(m2);
-             // m2.reg.oled.type = OLED_BLOCK_MAIN;
-             // m2.value.text = msg->value.text;
-             // bus_send(m2);
              break;
         default:
             break;

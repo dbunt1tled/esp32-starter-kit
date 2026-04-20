@@ -81,7 +81,7 @@ void bus_register(bus_action_t action, bus_handler_t handler) {
 }
 
 void bus_send(const bus_msg_t msg) {
-    BaseType_t ok = xQueueSend(bus, &msg, portMAX_DELAY);
+    const BaseType_t ok = xQueueSend(bus, &msg, portMAX_DELAY);
     if (ok != pdTRUE) {
         ESP_LOGE(BUS_TAG, "Queue Full or Error");
     }

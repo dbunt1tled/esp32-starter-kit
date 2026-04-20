@@ -7,6 +7,7 @@
 #include "components/led/leds.h"
 #include "components/nvs/nvs.h"
 #include "components/oled/oled.h"
+#include "components/sntp/sntp.h"
 
 static const char* MAIN_TAG = "Main";
 
@@ -31,4 +32,8 @@ void app_main(void) {
     led_init(LED_PIN);
     ESP_LOGI(MAIN_TAG, "led inited");
     wifi_init("sidni", "18111958");
+    time_sync_init();
+    while (true) {
+        vTaskDelay(pdMS_TO_TICKS(5000));
+    }
 }

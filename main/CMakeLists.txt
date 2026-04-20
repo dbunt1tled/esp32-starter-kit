@@ -22,6 +22,8 @@ idf_component_register(SRCS
         "components/bus/handlers/wifi_handler.c"
         "components/nvs/nvs.h"
         "components/nvs/nvs.c"
+        "components/sntp/sntp.h"
+        "components/sntp/sntp.c"
         INCLUDE_DIRS "."
         REQUIRES
         esp_driver_gpio

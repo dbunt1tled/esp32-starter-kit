@@ -49,6 +49,7 @@ void oled_flush(void);
 void oled_set_icons(const uint8_t icons);
 void oled_draw_text(const int x, const  int y, const char *text, const bool on);
 void oled_draw_text_big(const int x, const  int y, const char *text, const bool on);
+void oled_draw_text_centered(const int y, const char *text, const bool big, const bool on);
 void display_draw_icon(const uint8_t x, const uint8_t y, const icon_t *icon, const bool on);
 
 void oled_set_header(bool wifi, bool ble, bool battery);

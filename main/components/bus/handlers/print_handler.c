@@ -3,7 +3,6 @@
 //
 
 #include "handlers.h"
-#include <stdio.h>
 #include "esp_log.h"
 #include "components/bus/bus.h"
 #include "components/oled/oled.h"
@@ -14,7 +13,6 @@ void print_handler(const bus_msg_t *msg) {
     const oled_msg_t oled = msg->reg.oled;
     switch (oled.type) {
         case OLED_BLOCK_HEADER:
-            ESP_LOGI(PH_TAG, "OLED_BLOCK_HEADER set=%d, clear = %d", oled.icons.set,oled.icons.clear);
             if (OLED_ICON_WIFI & oled.icons.set) {
                 display_draw_icon(0,   0, &ICON_WIFI, true);
             }
@@ -56,15 +54,28 @@ void print_handler(const bus_msg_t *msg) {
             break;
         case OLED_BLOCK_TITLE:
             oled_clear_line(20, TITLE_H);
-            oled_draw_text(0, 20, msg->value.text, true);
+            if (msg->param.flag == 1) {
+                oled_draw_text_centered(20, msg->value.text, false, true);
+            } else {
+                oled_draw_text(0, 20, msg->value.text, true);
+            }
             break;
         case OLED_BLOCK_MAIN:
             oled_clear_line(36, MAIN_H);
-            oled_draw_text_big(0, 36, msg->value.text, true);
+            if (msg->param.flag == 1) {
+                oled_draw_text_centered(36, msg->value.text, true, true);
+            } else {
+                oled_draw_text_big(0, 36, msg->value.text, true);
+            }
             break;
         case OLED_BLOCK_FOOTER:
             oled_clear_line(56, FOOTER_H);
-            oled_draw_text(0, 56, msg->value.text, true);
+            if (msg->param.flag == 1) {
+                oled_draw_text_centered(56, msg->value.text, false, true);
+            } else {
+                oled_draw_text(0, 56, msg->value.text, true);
+            }
+
             break;
     }
     oled_flush();

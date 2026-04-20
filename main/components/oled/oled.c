@@ -62,6 +62,26 @@ void oled_draw_text(const int x, const  int y, const char *text, const bool on) 
 void oled_draw_text_big(const int x, const  int y, const char *text, const bool on) {
     ssd1306_draw_text_scaled(disp, x, y, text, on, 2);
 }
+
+void oled_draw_text_centered(const int y, const char *text, const bool big, const bool on) {
+    int c = 1;
+    if (big) {
+        c = 2;
+    }
+    const int max_char = 20 / c;
+    const int char_w = 6 * c;
+    const int len = strlen(text);
+    int x = 0;
+    if (len < max_char) {
+        x = ((max_char - len) / 2) * char_w;
+    }
+    if (big) {
+        oled_draw_text_big(x, y, text, on);
+    } else {
+        oled_draw_text(x, y, text, on);
+    }
+}
+
 void oled_set_icon(uint8_t *icons, const oled_icon_t icon, const bool on) {
     if (on) {
         *icons |= icon;
