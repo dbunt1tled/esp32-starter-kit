@@ -69,5 +69,13 @@ void wifi_init(const char *ssid, const char *password) {
 
     esp_wifi_set_mode(WIFI_MODE_STA);
     esp_wifi_set_config(WIFI_IF_STA, &wifi_config);
-    esp_wifi_start();
+    ESP_ERROR_CHECK(esp_wifi_start());
+}
+
+bool wifi_is_connected(void) {
+    wifi_ap_record_t wifi_data;
+    if (esp_wifi_sta_get_ap_info(&wifi_data) == ESP_OK) {
+        return true;
+    }
+    return false;
 }

@@ -4,6 +4,7 @@
 #include "components/bus/bus.h"
 #include "components/button/button.h"
 #include "components/button/handlers/handler.h"
+#include "components/dnsm/dnsm.h"
 #include "components/led/leds.h"
 #include "components/nvs/nvs.h"
 #include "components/oled/oled.h"
@@ -32,7 +33,12 @@ void app_main(void) {
     led_init(LED_PIN);
     ESP_LOGI(MAIN_TAG, "led inited");
     wifi_init("sidni", "18111958");
+    // if (!wifi_is_connected()) {
+    //     ESP_LOGE(MAIN_TAG, "WiFi is not connected");
+    //     return;
+    // }
     time_sync_init();
+    dnsm_init();
     while (true) {
         vTaskDelay(pdMS_TO_TICKS(5000));
     }

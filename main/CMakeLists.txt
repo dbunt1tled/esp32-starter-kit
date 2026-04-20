@@ -24,6 +24,8 @@ idf_component_register(SRCS
         "components/nvs/nvs.c"
         "components/sntp/sntp.h"
         "components/sntp/sntp.c"
+        "components/dnsm/dnsm.h"
+        "components/dnsm/dnsm.c"
         INCLUDE_DIRS "."
         REQUIRES
         esp_driver_gpio
