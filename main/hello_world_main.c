@@ -9,6 +9,7 @@
 #include "components/nvs/nvs.h"
 #include "components/oled/oled.h"
 #include "components/sntp/sntp.h"
+#include "components/temp/temp.h"
 
 static const char* MAIN_TAG = "Main";
 
@@ -39,6 +40,7 @@ void app_main(void) {
     // }
     time_sync_init();
     dnsm_init();
+    temp_init();
     while (true) {
         vTaskDelay(pdMS_TO_TICKS(5000));
     }

@@ -16,3 +16,4 @@ dependencies:
   #   public: true
   chill-sam/ssd1306: '*'
   espressif/mdns: '*'
+  esp-idf-lib/dht: '*'

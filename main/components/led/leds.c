@@ -29,9 +29,7 @@ static TaskHandle_t led_task_handle = NULL;
 static void led_task(void *arg)
 {
     uint32_t notified;
-
-    while (1) {
-
+    while (true) {
         const int64_t now = esp_timer_get_time() / 1000;
         if (xTaskNotifyWait(0, UINT32_MAX, &notified, pdMS_TO_TICKS(200))) {
             for (int gpio = 0; gpio < MAX_GPIO; gpio++) {
