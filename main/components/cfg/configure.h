@@ -5,8 +5,6 @@
 #ifndef ESP_START_KIT_CONFIGURE_H
 #define ESP_START_KIT_CONFIGURE_H
 
-#define USE_LOCAL_CONFIG 1
-
 #ifdef USE_LOCAL_CONFIG
     #include "configure_loc.h"
 #else
