@@ -39,6 +39,8 @@ idf_component_register(SRCS
         "components/ldr/ldr.c"
         "components/ir/ir.h"
         "components/ir/ir.c"
+        "components/pb/pb.h"
+        "components/pb/pb.c"
         INCLUDE_DIRS
         "."
         "components/cfg"

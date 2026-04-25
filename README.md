@@ -60,7 +60,7 @@ The ESP32 Starter Kit is an advanced IoT development platform designed for ESP32
 ### Hardware in Action
 
 Watch the ESP32 Starter Kit in action with sensor readings and display output:
-
+![Demo](assets/esp32_s.gif)
 [📹 View Demo Video](assets/esp32.mp4)
 
 > **Note**: The video demonstrates real-time temperature and humidity sensor readouts on the OLED display, showcasing the kit's data acquisition and visualization capabilities.
