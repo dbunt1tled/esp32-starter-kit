@@ -22,6 +22,7 @@ idf_component_register(SRCS
         "components/bus/handlers/wifi_handler.c"
         "components/bus/handlers/motion_handler.c"
         "components/bus/handlers/ldr_handler.c"
+        "components/bus/handlers/ir_handler.c"
         "components/nvs/nvs.h"
         "components/nvs/nvs.c"
         "components/sntp/sntp.h"
@@ -36,6 +37,8 @@ idf_component_register(SRCS
         "components/motion/motion.c"
         "components/ldr/ldr.h"
         "components/ldr/ldr.c"
+        "components/ir/ir.h"
+        "components/ir/ir.c"
         INCLUDE_DIRS
         "."
         "components/cfg"

@@ -12,6 +12,7 @@ typedef enum {
     ACTION_WIFI,
     ACTION_MOTION,
     ACTION_LDR,
+    ACTION_IR,
 } bus_action_t;
 
 typedef struct {

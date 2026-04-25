@@ -40,7 +40,7 @@ static void timer_cb(void *arg) {
         save_contrast = current_contrast;
     }
 
-    ESP_LOGI(LDR_TAG, "raw=%d filtered=%.1f contrast=%d", raw, filtered, current_contrast);
+    // ESP_LOGI(LDR_TAG, "raw=%d filtered=%.1f contrast=%d", raw, filtered, current_contrast);
 }
 
 static void adc_init(void) {

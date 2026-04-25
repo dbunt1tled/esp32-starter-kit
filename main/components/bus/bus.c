@@ -57,6 +57,7 @@ void bus_init(bus_cfg_t *cfg) {
     bus_register(ACTION_WIFI, wifi_handler);
     bus_register(ACTION_MOTION, motion_handler);
     bus_register(ACTION_LDR, ldr_handler);
+    bus_register(ACTION_IR, ir_handler);
     xTaskCreate(
         bus_consumer,
         "bus_task",

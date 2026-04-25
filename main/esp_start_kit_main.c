@@ -13,6 +13,7 @@
 #include "components/temp/temp.h"
 #include "components/cfg/configure.h"
 #include "components/ldr/ldr.h"
+#include "components/ir/ir.h"
 
 static const char *MAIN_TAG = "Main";
 
@@ -46,9 +47,9 @@ void app_main(void) {
     // motion_init();
     // ESP_LOGI(MAIN_TAG, "PIR ready.");
     ldr_init();
-    vTaskDelay(pdMS_TO_TICKS(10000));
     ESP_LOGI(MAIN_TAG, "LDR inited");
-    set_contrast(0xFF);
+    ir_init();
+    ESP_LOGI(MAIN_TAG, "IR inited");
     while (true) {
         vTaskDelay(pdMS_TO_TICKS(5000));
     }
