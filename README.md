@@ -1,53 +1,136 @@
-| Supported Targets | ESP32 | ESP32-C2 | ESP32-C3 | ESP32-C5 | ESP32-C6 | ESP32-C61 | ESP32-H2 | ESP32-H21 | ESP32-H4 | ESP32-P4 | ESP32-S2 | ESP32-S3 | Linux |
-| ----------------- | ----- | -------- | -------- | -------- | -------- | --------- | -------- | --------- | -------- | -------- | -------- | -------- | ----- |
+## Supported Sensors
 
-# Hello World Example
+The project supports the following sensor components:
 
-Starts a FreeRTOS task to print "Hello World".
+| Sensor Component | Function | Dependencies |
+  |-----------------|----------|--------------|                                          
+| Temperature Sensor | Read and display temperature readings | dht |                   
+| Humidity Sensor | Monitor air humidity levels | dht |                                
+| LDR Sensor | Light/dark ratio sensing (Light Detection Resistor) | - |               
+| Motion Sensor | Detect movement in real-time | - |                                   
+| OLED Display | Centered text display with contrast control | - |                     
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+### Sensor Capabilities
 
-## How to use example
+- **Temperature** (DHT sensor)
+- **Humidity** (DHT sensor)
+- **Light Sensing** (LDR)
+- **Motion Detection** (IMU-based)
+- **Display** (OLED with center alignment and contrast)
 
-Follow detailed instructions provided specifically for this example.
+## Video Documentation
 
-Select the instructions depending on Espressif chip installed on your development board:
+### Video Reference
 
-- [ESP32 Getting Started Guide](https://docs.espressif.com/projects/esp-idf/en/stable/get-started/index.html)
-- [ESP32-S2 Getting Started Guide](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s2/get-started/index.html)
+> The device includes a video demonstration of temperature and humidity sensor
+readouts. For details, view the video file located at `@assets/esp32.mp4`.
 
 
-## Example folder contents
+❯ write this to the readme.md
 
-The project **hello_world** contains one source file in C language [hello_world_main.c](main/hello_world_main.c). The file is located in folder [main](main).
+⏺ ESP Start Kit
 
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt` files that provide set of directives and instructions describing the project's source files and targets (executable, library, or both).
+▎ IoT Development Platform for ESP32-S3 Microcontrollers                               
+▎ A cross-platform, modular IoT development environment featuring hardware abstraction,
+▎  HTTP client integration, and OLED contrast control.
+                  
+---                                                                                    
+🚀 Project Overview
 
-Below is short explanation of remaining files in the project folder.
+The ESP Start Kit is an advanced IoT development platform designed for low-resource
+microcontrollers. Built for real-time IoT devices, it provides a modular architecture  
+supporting motion detection, sensor integration, and time synchronization.
 
-```
-├── CMakeLists.txt
-├── pytest_hello_world.py      Python script used for automated testing
-├── main
-│   ├── CMakeLists.txt
-│   └── hello_world_main.c
-└── README.md                  This is the file you are currently reading
-```
+✅ Key Features                                                                        ─
 
-For more information on structure and contents of ESP-IDF projects, please refer to Section [Build System](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/build-system.html) of the ESP-IDF Programming Guide.
+- Hardware Abstraction: Efficient low-power microcontroller support
+- IoT Sensor Integration: Motion, LDR, and temperature/humidity sensing
+- HTTP Client: Built-in client library for web services
+- OLED Display: Contrast-controlled LCD/LED screen with centered text output
+- Time Synchronization: SNTP and NTP integration
+- MDNS Service: Local network service discovery
+- Build Configuration: Dynamic USE_LOCAL_CONFIG macro management
+- Mobile Release: Session token storage compliant with new legal requirements
 
-## Troubleshooting
+  ---                                                                                    
+📦 Release Branch
 
-* Program upload failure
+This repository includes a release branch (release-2026-03-05) for mobile cut features.
+- Release Branch: https://github.com/esp-start-kit/release-2026-03-05 
+---                                                                                    
+🛠 Quick Start
 
-    * Hardware connection is not correct: run `idf.py -p PORT monitor`, and reboot your board to see if there are any output logs.
-    * The baud rate for downloading is too high: lower your baud rate in the `menuconfig` menu, and try again.
+1. Clone the repository:
 
-## Technical support and feedback
+git clone https://github.com/esp-start-kit/esp_start_kit.git                           
+cd esp_start_kit
 
-Please use the following feedback channels:
+2. Configure:                                                                          
+   touch config/configure.h
 
-* For technical queries, go to the [esp32.com](https://esp32.com/) forum
-* For a feature request or bug report, create a [GitHub issue](https://github.com/espressif/esp-idf/issues)
+3. Build:                                                                              
+   make
 
-We will get back to you as soon as possible.
+  ---                                                                                    
+📁 File Structure
+
+esp_start_kit/                                                                         
+├── README.md              # Project documentation                                     
+├── Makefile               # Build configuration                                       
+├── config/                                                                            
+│   ├── configure.h        # Configurable build macros                                 
+│   └── esp32.mp4          # Hardware video capture                                    
+├── components/            # Sensor and controller components                          
+├── examples/              # Code examples                                             
+├── tests/                 # Unit tests                                                
+├── scripts/               # Automation scripts                                        
+├── legal/                 # Compliance documentation                                  
+├── .gitignore            # Git ignore rules                                           
+└── .github/               # GitHub workflows
+                                                                                         
+---                                                                                    
+⚙️ Build Instructions
+
+macOS (Using Xcode)
+
+xcode-select --install                                                                 
+make
+
+Linux (Using Yocto)
+
+make clean                                                                             
+make distrelease
+                                                                                         
+---                                                                                    
+🌐 External Resources
+
+- Project Tracking: Check Linear for https://linear.app/esp-start-kit
+- Oncall Dashboard: Visit Grafana at https://grafana.internal/d/api-latency to monitor
+  request handling
+- Compliance Policy: Review legal docs at ./legal/session_token_policy.txt
+
+  ---                                                                                    
+🧪 Testing
+
+make test       
+make test-integration
+                                                                                         
+---                                                                                    
+📚 License
+
+Licensed under MIT.
+                                                                                         
+---                                                                                    
+🤝 Contributing
+
+Contributions are welcome! Please read our contributing guidelines.
+                                                                                         
+---                                                                                    
+👥 Team
+
+- Deni: Main Developer
+- IoT Team: Hardware and Software Design
+  ---                                                                                    
+📄 License
+
+MIT License 
