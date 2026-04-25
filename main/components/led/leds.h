@@ -2,8 +2,8 @@
 // Created by admin on 10.04.2026.
 //
 
-#ifndef HELLO_WORLD_ESP_LEDS_H
-#define HELLO_WORLD_ESP_LEDS_H
+#ifndef ESP_START_KIT_LEDS_H
+#define ESP_START_KIT_LEDS_H
 #include "driver/gpio.h"
 
 #define LED_PIN GPIO_NUM_2
@@ -17,4 +17,4 @@ typedef enum {
 
 void led_init(gpio_num_t gpio);
 void led_set(gpio_num_t gpio, led_cmd_t cmd);
-#endif //HELLO_WORLD_ESP_LEDS_H
+#endif //ESP_START_KIT_LEDS_H

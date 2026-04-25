@@ -6,12 +6,15 @@
 #include "components/button/handlers/handler.h"
 #include "components/dnsm/dnsm.h"
 #include "components/led/leds.h"
+#include "components/motion/motion.h"
 #include "components/nvs/nvs.h"
 #include "components/oled/oled.h"
 #include "components/sntp/sntp.h"
 #include "components/temp/temp.h"
+#include "components/cfg/configure.h"
+#include "components/ldr/ldr.h"
 
-static const char* MAIN_TAG = "Main";
+static const char *MAIN_TAG = "Main";
 
 void app_main(void) {
     ESP_LOGI(MAIN_TAG, "Start Program");
@@ -33,14 +36,19 @@ void app_main(void) {
     nvs_init();
     led_init(LED_PIN);
     ESP_LOGI(MAIN_TAG, "led inited");
-    wifi_init("sidni", "18111958");
-    // if (!wifi_is_connected()) {
-    //     ESP_LOGE(MAIN_TAG, "WiFi is not connected");
-    //     return;
-    // }
+    wifi_init(WIFI_SSID, WIFI_PASSWORD);
+    ESP_LOGI(MAIN_TAG, "wifi inited ssid:%s", WIFI_SSID);
     time_sync_init();
-    dnsm_init();
+    // dnsm_init();
     temp_init();
+    ESP_LOGI(MAIN_TAG, "WARM PIR... waiting 60 sec");
+    // vTaskDelay(pdMS_TO_TICKS(60000));
+    // motion_init();
+    // ESP_LOGI(MAIN_TAG, "PIR ready.");
+    ldr_init();
+    vTaskDelay(pdMS_TO_TICKS(10000));
+    ESP_LOGI(MAIN_TAG, "LDR inited");
+    set_contrast(0xFF);
     while (true) {
         vTaskDelay(pdMS_TO_TICKS(5000));
     }

@@ -21,7 +21,6 @@ typedef struct {
     int64_t last_toggle;
 } led_t;
 
-static const char *LED_TAG = "led";
 static led_t *leds[MAX_GPIO];
 
 static TaskHandle_t led_task_handle = NULL;

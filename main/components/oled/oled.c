@@ -9,6 +9,11 @@
 #include "../icons/icons.h"
 
 static ssd1306_handle_t disp;
+static i2c_master_bus_handle_t bus;
+static i2c_master_dev_handle_t oled_dev2;
+
+#define SSD1306_ADDR 0x3C
+#define SSD1306_CMD_CONTRAST 0x81
 
 static void i2c_init(void) {
     i2c_master_bus_config_t bus_cfg = {
@@ -19,11 +24,9 @@ static void i2c_init(void) {
         .glitch_ignore_cnt = 7,
         .flags.enable_internal_pullup = true,
     };
-
-    i2c_master_bus_handle_t bus;
     ESP_ERROR_CHECK(i2c_new_master_bus(&bus_cfg, &bus));
 
-    ssd1306_config_t cfg = {
+    const ssd1306_config_t cfg = {
         .bus = SSD1306_I2C,
         .width = OLED_WIDTH,
         .height = OLED_HEIGHT,
@@ -35,8 +38,36 @@ static void i2c_init(void) {
     };
 
     ESP_ERROR_CHECK(ssd1306_new_i2c(&cfg, &disp));
+
+    const i2c_device_config_t dev_cfg = {
+        .dev_addr_length = I2C_ADDR_BIT_LEN_7,
+        .device_address  = SSD1306_ADDR,
+        .scl_speed_hz    = 400000,
+    };
+    ESP_ERROR_CHECK(i2c_master_bus_add_device(bus, &dev_cfg, &oled_dev2));
 }
 
+static esp_err_t ssd1306_send_cmd_raw(const uint8_t cmd)
+{
+    const uint8_t buf[2] = {0x00, cmd}; // 0x00 = control byte (команда)
+    return i2c_master_transmit(oled_dev2, buf, sizeof(buf), 100);
+}
+
+esp_err_t set_contrast(const uint8_t contrast) {
+    if (!oled_dev2) {
+        ESP_LOGE("OLED", "OLED device not initialized");
+        return ESP_ERR_INVALID_ARG;
+    }
+    esp_err_t ret = ssd1306_send_cmd_raw(SSD1306_CMD_CONTRAST); // 0x81
+    if (ret != ESP_OK) {
+        ESP_LOGE("OLED", "OLED device error %d", ret);
+
+        return ret;
+    }
+    ret = ssd1306_send_cmd_raw(contrast);
+
+    return ret;
+}
 void oled_flush(void) {
     ssd1306_display(disp);
 }

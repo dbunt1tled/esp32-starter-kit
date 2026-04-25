@@ -7,8 +7,6 @@
 #include "components/bus/bus.h"
 #include "components/oled/oled.h"
 
-static const char* PH_TAG = "PH";
-
 void print_handler(const bus_msg_t *msg) {
     const oled_msg_t oled = msg->reg.oled;
     switch (oled.type) {

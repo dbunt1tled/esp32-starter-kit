@@ -2,8 +2,8 @@
 // Created by admin on 12.04.2026.
 //
 
-#ifndef HELLO_WORLD_ESP_OLED_H
-#define HELLO_WORLD_ESP_OLED_H
+#ifndef ESP_START_KIT_OLED_H
+#define ESP_START_KIT_OLED_H
 
 #include "driver/i2c_master.h"
 #include "../icons/icons.h"
@@ -47,6 +47,7 @@ void oled_clear(void);
 void test_ol(void);
 void oled_flush(void);
 void oled_set_icons(const uint8_t icons);
+esp_err_t set_contrast(const uint8_t contrast);
 void oled_draw_text(const int x, const  int y, const char *text, const bool on);
 void oled_draw_text_big(const int x, const  int y, const char *text, const bool on);
 void oled_draw_text_centered(const int y, const char *text, const bool big, const bool on);
@@ -57,4 +58,4 @@ void oled_set_text(oled_block_t block, const char *text);
 void oled_clear_line(const int y, const int h);
 void oled_clear_area(const int x, const int y, const int w, const int h);
 void oled_render(void);
-#endif //HELLO_WORLD_ESP_OLED_H
+#endif //ESP_START_KIT_OLED_H

@@ -2,7 +2,7 @@ file(STRINGS ${CMAKE_CURRENT_LIST_DIR}/../version.txt PROJECT_VER LIMIT_COUNT 1)
 string(STRIP "${PROJECT_VER}" PROJECT_VER)
 
 idf_component_register(SRCS
-        "hello_world_main.c"
+        "esp_start_kit_main.c"
         "components/button/button.h"
         "components/button/button.c"
         "components/button/handlers/handler.h"
@@ -20,6 +20,8 @@ idf_component_register(SRCS
         "components/bus/handlers/handlers.h"
         "components/bus/handlers/print_handler.c"
         "components/bus/handlers/wifi_handler.c"
+        "components/bus/handlers/motion_handler.c"
+        "components/bus/handlers/ldr_handler.c"
         "components/nvs/nvs.h"
         "components/nvs/nvs.c"
         "components/sntp/sntp.h"
@@ -28,7 +30,15 @@ idf_component_register(SRCS
         "components/dnsm/dnsm.c"
         "components/temp/temp.h"
         "components/temp/temp.c"
-        INCLUDE_DIRS "."
+        "components/http/client/h_client.h"
+        "components/http/client/h_client.c"
+        "components/motion/motion.h"
+        "components/motion/motion.c"
+        "components/ldr/ldr.h"
+        "components/ldr/ldr.c"
+        INCLUDE_DIRS
+        "."
+        "components/cfg"
         REQUIRES
         esp_driver_gpio
         esp_driver_ledc
@@ -40,5 +50,8 @@ idf_component_register(SRCS
         esp_wifi
         lwip
         nvs_flash
+        esp_http_client
+        mbedtls
+        esp_adc
 )
 target_compile_definitions(${COMPONENT_LIB} PRIVATE -DPROJECT_VER="${PROJECT_VER}")

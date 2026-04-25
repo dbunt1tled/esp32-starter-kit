@@ -8,8 +8,6 @@
 #include "components/bus/bus.h"
 #include "components/oled/oled.h"
 
-static const char* WH_TAG = "WH";
-
 void wifi_handler(const bus_msg_t *msg) {
     switch (msg->reg.wifi_event) {
         case WIFI_EVENT_CONNECTED:

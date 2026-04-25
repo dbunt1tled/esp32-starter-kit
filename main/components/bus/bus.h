@@ -2,14 +2,16 @@
 // Created by admin on 16.04.2026.
 //
 
-#ifndef HELLO_WORLD_ESP_BUS_H
-#define HELLO_WORLD_ESP_BUS_H
+#ifndef ESP_START_KIT_BUS_H
+#define ESP_START_KIT_BUS_H
 #include "components/oled/oled.h"
 #include "components/wifi/wifi.h"
 
 typedef enum {
     ACTION_PRINT,
-    ACTION_WIFI
+    ACTION_WIFI,
+    ACTION_MOTION,
+    ACTION_LDR,
 } bus_action_t;
 
 typedef struct {
@@ -29,6 +31,7 @@ typedef struct {
     union {
         int val;
         char* text;
+        uint8_t val8;
     } value;
 
 } bus_msg_t;
@@ -39,4 +42,4 @@ void bus_init(bus_cfg_t *cfg);
 void bus_register(bus_action_t action, bus_handler_t handler);
 void bus_send(bus_msg_t msg);
 void bus_send_isr(bus_msg_t msg);
-#endif //HELLO_WORLD_ESP_BUS_H
+#endif //ESP_START_KIT_BUS_H

@@ -2,8 +2,8 @@
 // Created by admin on 10.04.2026.
 //
 
-#ifndef HELLO_WORLD_ESP_BUTTON_H
-#define HELLO_WORLD_ESP_BUTTON_H
+#ifndef ESP_START_KIT_BUTTON_H
+#define ESP_START_KIT_BUTTON_H
 #include "driver/gpio.h"
 
 #define BUTTON_PIN GPIO_NUM_4
@@ -30,4 +30,4 @@ typedef struct {
 void button_init(const gpio_num_t gpio, const button_callback_t cb);
 
 
-#endif //HELLO_WORLD_ESP_BUTTON_H
+#endif //ESP_START_KIT_BUTTON_H
