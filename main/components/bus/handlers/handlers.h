@@ -11,4 +11,5 @@ void wifi_handler(const bus_msg_t *msg);
 void motion_handler(const bus_msg_t *msg);
 void ldr_handler(const bus_msg_t *msg);
 void ir_handler(const bus_msg_t *msg);
+void rain_handler(const bus_msg_t *msg);
 #endif //ESP_START_KIT_HANDLERS_H

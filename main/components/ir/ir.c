@@ -46,7 +46,7 @@ static void ir_task(void *arg)
                 .action = ACTION_IR,
                 .value = {.val = level}
             };
-            bus_send_isr(msg);
+            bus_send(msg);
         }
         vTaskDelay(pdMS_TO_TICKS(25));
     }

@@ -15,6 +15,8 @@
 #include "components/ldr/ldr.h"
 #include "components/ir/ir.h"
 #include "components/pb/pb.h"
+#include "components/rain/rain.h"
+#include "services/adc/adc.h"
 
 static const char *MAIN_TAG = "Main";
 
@@ -47,12 +49,18 @@ void app_main(void) {
     // vTaskDelay(pdMS_TO_TICKS(60000));
     // motion_init();
     // ESP_LOGI(MAIN_TAG, "PIR ready.");
-    ldr_init();
-    ESP_LOGI(MAIN_TAG, "LDR inited");
+
     pb_init();
     ESP_LOGI(MAIN_TAG, "PB inited");
     ir_init();
     ESP_LOGI(MAIN_TAG, "IR inited");
+
+    adc_service_init();
+    ldr_init();
+    ESP_LOGI(MAIN_TAG, "LDR inited");
+    rain_init();
+    ESP_LOGI(MAIN_TAG, "Rain inited");
+
     gamma_p();
     while (true) {
         vTaskDelay(pdMS_TO_TICKS(5000));

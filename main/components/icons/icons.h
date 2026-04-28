@@ -26,5 +26,8 @@ extern const icon_t ICON_BATTERY_CHARGING ;
 extern const icon_t ICON_SIGNAL_FULL;
 extern const icon_t ICON_SIGNAL_HALF;
 extern const icon_t ICON_SIGNAL_NO;
+extern const icon_t ICON_SUN;
+extern const icon_t ICON_CLOUD_RAIN;
+extern const icon_t ICON_RAIN;
 
 #endif //ESP_START_KIT_ICONS_H

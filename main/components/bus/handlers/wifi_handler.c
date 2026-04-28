@@ -45,7 +45,7 @@ void wifi_handler(const bus_msg_t *msg) {
                      .type = OLED_BLOCK_TITLE,
                  },
                 .param.flag = 0,
-                 .value.text = buffer,
+                .value.text = buffer,
              };
              bus_send(m2);
              break;

@@ -47,8 +47,28 @@ void print_handler(const bus_msg_t *msg) {
                 }
             }
             if (OLED_ICON_BATT & oled.icons.clear) {
-                oled_clear_area(110, 0, 10, 8);
+                oled_clear_area(40, 0, 10, 8);
             }
+            if (OLED_ICON_RAIN & oled.icons.set) {
+                oled_clear_area(40, 0, 10, 8);
+                switch (msg->value.val) {
+                    case 0:
+                        display_draw_icon(40,   0, &ICON_SUN, true);
+                        break;
+                    case 1:
+                        display_draw_icon(40,   0, &ICON_CLOUD_RAIN, true);
+                        break;
+                    case 2:
+                        display_draw_icon(40,   0, &ICON_RAIN, true);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if (OLED_ICON_RAIN & oled.icons.clear) {
+                oled_clear_area(40, 0, 10, 8);
+            }
+
             break;
         case OLED_BLOCK_TITLE:
             oled_clear_line(20, TITLE_H);

@@ -13,6 +13,7 @@ typedef enum {
     ACTION_MOTION,
     ACTION_LDR,
     ACTION_IR,
+    ACTION_RAIN,
 } bus_action_t;
 
 typedef struct {
