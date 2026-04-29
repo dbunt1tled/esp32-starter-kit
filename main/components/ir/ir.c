@@ -12,7 +12,7 @@
 #include "esp_log.h"
 #include "components/bus/bus.h"
 
-static const char* IR_TAG = "IR";
+// static const char* IR_TAG = "IR";
 
 // static void IRAM_ATTR ir_isr_handler(void *arg) {
 //
@@ -37,9 +37,10 @@ static const char* IR_TAG = "IR";
 // }
 static void ir_task(void *arg)
 {
-    int prev_level = -1;
+    static int prev_level = -1;
     while (true) {
         const int level = gpio_get_level(IR_PIN);
+        // ESP_LOGI(IR_TAG, "IR level: %d", level);
         if (level != prev_level) {
             prev_level = level;
             const bus_msg_t msg = {

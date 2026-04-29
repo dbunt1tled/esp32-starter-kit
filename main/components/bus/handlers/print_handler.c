@@ -24,7 +24,7 @@ void print_handler(const bus_msg_t *msg) {
                 display_draw_icon(20,   0, &ICON_BLUETOOTH, false);
             }
             if (OLED_ICON_BATT & oled.icons.set) {
-                oled_clear_area(110, 0, 10, 8);
+                oled_clear_area(110, 0, 16, 16);
                 switch (msg->value.val) {
                     case 0:
                         display_draw_icon(110,   0, &ICON_BATTERY_EMPTY, true);
@@ -47,10 +47,10 @@ void print_handler(const bus_msg_t *msg) {
                 }
             }
             if (OLED_ICON_BATT & oled.icons.clear) {
-                oled_clear_area(40, 0, 10, 8);
+                oled_clear_area(40, 0, 16, 16);
             }
             if (OLED_ICON_RAIN & oled.icons.set) {
-                oled_clear_area(40, 0, 10, 8);
+                oled_clear_area(40, 0, 16, 16);
                 switch (msg->value.val) {
                     case 0:
                         display_draw_icon(40,   0, &ICON_SUN, true);
@@ -66,7 +66,7 @@ void print_handler(const bus_msg_t *msg) {
                 }
             }
             if (OLED_ICON_RAIN & oled.icons.clear) {
-                oled_clear_area(40, 0, 10, 8);
+                oled_clear_area(40, 0, 16, 16);
             }
 
             break;

@@ -7,8 +7,9 @@
 #include "components/bus/bus.h"
 
 // static const char* RAIN_TAG = "RAIN_H";
+
 void rain_handler(const bus_msg_t *msg) {
-    //ESP_LOGI(RAIN_TAG, "RAIN=%d", msg->value.val);
+    // ESP_LOGI(RAIN_TAG, "RAIN=%d", msg->value.val);
     bus_msg_t m = {
         .action = ACTION_PRINT,
         .reg.oled = {
