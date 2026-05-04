@@ -33,13 +33,13 @@ static void pir_polling_task(void *arg)
         if (curr_level != prev_level) {
             if (curr_level == 1) {
                 ESP_LOGI("MOTION", "[Polling] Движение обнаружено! %d", curr_level);
-                http_post_req(
-                    TELEGRAM_URL_SEND_MESSAGE,
-                    "{\"chat_id\": 307851817, \"text\": \"Motion detected!!!\"}",
-                    "application/json",
-                    response,
-                    sizeof(response)
-                );
+                // http_post_req(
+                //     TELEGRAM_URL_SEND_MESSAGE,
+                //     "{\"chat_id\": 307851817, \"text\": \"Motion detected!!!\"}",
+                //     "application/json",
+                //     response,
+                //     sizeof(response)
+//                );
             }
             prev_level = curr_level;
         }
@@ -59,6 +59,6 @@ void motion_init(void) {
 
     ESP_ERROR_CHECK(gpio_config(&io_conf));
     ESP_ERROR_CHECK(gpio_isr_handler_add(MOTION_PIN, motion_isr_handler, (void*) MOTION_PIN));
-    // xTaskCreate(pir_polling_task, "pir_polling_task", 2048, NULL, 5, NULL);
+    //xTaskCreate(pir_polling_task, "pir_polling_task", 8192, NULL, 5, NULL);
 }
 

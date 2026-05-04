@@ -32,7 +32,7 @@ void app_main(void) {
     ESP_LOGI(MAIN_TAG, "oled inited");
     bus_cfg_t q_qfg = {
         .count = 10,
-        .delay = 100,
+        .delay = 50,
     };
 
     bus_init(&q_qfg);
@@ -47,8 +47,8 @@ void app_main(void) {
     temp_init();
     ESP_LOGI(MAIN_TAG, "WARM PIR... waiting 60 sec");
     // vTaskDelay(pdMS_TO_TICKS(60000));
-    // motion_init();
-    // ESP_LOGI(MAIN_TAG, "PIR ready.");
+    motion_init();
+    ESP_LOGI(MAIN_TAG, "PIR ready.");
 
     pb_init();
     ESP_LOGI(MAIN_TAG, "PB inited");

@@ -30,7 +30,7 @@ static void temp_task(void *arg) {
             m.value.text = "Temperature Err";
         }
         bus_send(m);
-        vTaskDelay(pdMS_TO_TICKS(10000));
+        vTaskDelay(pdMS_TO_TICKS(25000));
     }
 }
 
