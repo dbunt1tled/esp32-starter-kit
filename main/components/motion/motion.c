@@ -13,6 +13,7 @@
 #include "components/bus/bus.h"
 #include "components/http/client/h_client.h"
 
+static const char* MOTION_TAG = "MOTION";
 
 static void IRAM_ATTR motion_isr_handler(void *arg) {
     const bus_msg_t msg = {
@@ -32,7 +33,7 @@ static void pir_polling_task(void *arg)
 
         if (curr_level != prev_level) {
             if (curr_level == 1) {
-                ESP_LOGI("MOTION", "[Polling] Движение обнаружено! %d", curr_level);
+                ESP_LOGI(MOTION_TAG, "[Polling] Движение обнаружено! %d", curr_level);
                 // http_post_req(
                 //     TELEGRAM_URL_SEND_MESSAGE,
                 //     "{\"chat_id\": 307851817, \"text\": \"Motion detected!!!\"}",
@@ -43,7 +44,7 @@ static void pir_polling_task(void *arg)
             }
             prev_level = curr_level;
         }
-        ESP_LOGI("MOTION", "STATE %d", curr_level);
+        ESP_LOGI(MOTION_TAG, "STATE %d", curr_level);
         vTaskDelay(pdMS_TO_TICKS(2000));
     }
 }
@@ -60,5 +61,6 @@ void motion_init(void) {
     ESP_ERROR_CHECK(gpio_config(&io_conf));
     ESP_ERROR_CHECK(gpio_isr_handler_add(MOTION_PIN, motion_isr_handler, (void*) MOTION_PIN));
     //xTaskCreate(pir_polling_task, "pir_polling_task", 8192, NULL, 5, NULL);
+    ESP_LOGI(MOTION_TAG, "PIR ready.");
 }
 

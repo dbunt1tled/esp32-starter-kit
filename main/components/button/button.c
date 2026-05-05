@@ -7,14 +7,15 @@
 #include "freertos/task.h"
 #include <stdlib.h>
 #include "esp_timer.h"
+#include "esp_log.h"
 
 #define MAX_GPIO 40
 #define DEBOUNCE_MS 10
 #define LONG_PRESS_MS 800
 #define DOUBLE_CLICK_MS 400
 
+static const char* BUT_TAG = "BUT";
 static button_t *buttons[MAX_GPIO];
-
 static TaskHandle_t button_task_handle = NULL;
 
 static void IRAM_ATTR gpio_isr_handler(void *arg) {
@@ -97,4 +98,5 @@ void button_init(const gpio_num_t gpio, const button_callback_t cb) {
         xTaskCreate(button_task, "button_task", 2048, NULL, 10, &button_task_handle);
     }
     gpio_isr_handler_add(gpio, gpio_isr_handler, (void *) gpio);
+    ESP_LOGI(BUT_TAG, "button inited");
 }

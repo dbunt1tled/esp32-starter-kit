@@ -11,6 +11,7 @@
 static ssd1306_handle_t disp;
 static i2c_master_bus_handle_t bus;
 static i2c_master_dev_handle_t oled_dev2;
+static const char* OLED_TAG = "OLED";
 
 #define SSD1306_ADDR 0x3C
 #define SSD1306_CMD_CONTRAST 0x81
@@ -124,6 +125,7 @@ void oled_init(void) {
     i2c_init();
     oled_clear();
     oled_flush();
+    ESP_LOGI(OLED_TAG, "oled inited");
 }
 
 void display_draw_icon(const uint8_t x, const uint8_t y, const icon_t *icon, const bool on) {

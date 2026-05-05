@@ -11,6 +11,8 @@
 #include "components/bus/bus.h"
 #include "services/adc/adc.h"
 
+static const char *RAIN_TAG = "RAIN";
+
 static void rain_task(void *arg)
 {
     while (true) {
@@ -29,4 +31,5 @@ static void rain_task(void *arg)
 void rain_init(void) {
     adc_service_add_channel(RAIN_PIN);
     xTaskCreate(rain_task, "rain_task", configMINIMAL_STACK_SIZE * 2, NULL, 5, NULL);
+    ESP_LOGI(RAIN_TAG, "Rain inited");
 }

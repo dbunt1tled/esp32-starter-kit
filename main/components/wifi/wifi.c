@@ -12,6 +12,8 @@
 
 #include "components/bus/bus.h"
 
+static const char* WIFI_TAG = "WIFI";
+
 static void wifi_event_handler(
     void *arg,
     esp_event_base_t event_base,
@@ -70,6 +72,7 @@ void wifi_init(const char *ssid, const char *password) {
     esp_wifi_set_mode(WIFI_MODE_STA);
     esp_wifi_set_config(WIFI_IF_STA, &wifi_config);
     ESP_ERROR_CHECK(esp_wifi_start());
+    ESP_LOGI(WIFI_TAG, "wifi inited ssid:%s", ssid);
 }
 
 bool wifi_is_connected(void) {

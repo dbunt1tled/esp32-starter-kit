@@ -22,7 +22,7 @@ typedef struct {
 } led_t;
 
 static led_t *leds[MAX_GPIO];
-
+static const char* LED_TAG = "LED";
 static TaskHandle_t led_task_handle = NULL;
 
 static void led_task(void *arg)
@@ -117,4 +117,5 @@ void led_set(const gpio_num_t gpio, const led_cmd_t cmd)
     }
 
     xTaskNotify(led_task_handle, (1UL << gpio), eSetBits);
+    ESP_LOGI(LED_TAG, "led inited");
 }

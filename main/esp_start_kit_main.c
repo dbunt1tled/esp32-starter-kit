@@ -27,39 +27,28 @@ void app_main(void) {
     gpio_install_isr_service(0);
     ESP_LOGI(MAIN_TAG, "isr_installed");
     button_init(BUTTON_PIN, led_handler);
-    ESP_LOGI(MAIN_TAG, "button inited");
     oled_init();
-    ESP_LOGI(MAIN_TAG, "oled inited");
     bus_cfg_t q_qfg = {
         .count = 10,
         .delay = 50,
     };
-
     bus_init(&q_qfg);
-    ESP_LOGI(MAIN_TAG, "bus inited");
+
     nvs_init();
     led_init(LED_PIN);
-    ESP_LOGI(MAIN_TAG, "led inited");
     wifi_init(WIFI_SSID, WIFI_PASSWORD);
-    ESP_LOGI(MAIN_TAG, "wifi inited ssid:%s", WIFI_SSID);
     time_sync_init();
     // dnsm_init();
     temp_init();
-    ESP_LOGI(MAIN_TAG, "WARM PIR... waiting 60 sec");
+    // ESP_LOGI(MAIN_TAG, "WARM PIR... waiting 60 sec");
     // vTaskDelay(pdMS_TO_TICKS(60000));
     motion_init();
-    ESP_LOGI(MAIN_TAG, "PIR ready.");
-
     pb_init();
-    ESP_LOGI(MAIN_TAG, "PB inited");
     ir_init();
-    ESP_LOGI(MAIN_TAG, "IR inited");
-
     adc_service_init();
     ldr_init();
-    ESP_LOGI(MAIN_TAG, "LDR inited");
     rain_init();
-    ESP_LOGI(MAIN_TAG, "Rain inited");
+
 
     gamma_p();
     while (true) {

@@ -28,6 +28,7 @@ void pb_init(void) {
       .hpoint = 0,
    };
    ledc_channel_config(&channel);
+   ESP_LOGI(PB_TAG, "PB inited");
 }
 
 void gamma_p(void) {

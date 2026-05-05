@@ -75,7 +75,7 @@ void bus_init(bus_cfg_t *cfg) {
         3,
         NULL
     );
-    ESP_LOGI(BUS_TAG, "Queue created");
+    ESP_LOGI(BUS_TAG, "bus inited");
 }
 
 void bus_register(bus_action_t action, bus_handler_t handler) {

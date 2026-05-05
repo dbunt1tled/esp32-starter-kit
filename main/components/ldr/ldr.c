@@ -11,7 +11,7 @@
 #include "components/bus/bus.h"
 #include "services/adc/adc.h"
 
-// static const char *LDR_TAG = "LDR";
+static const char *LDR_TAG = "LDR";
 
 static float filtered = 0;
 static uint8_t current_contrast = 0;
@@ -46,4 +46,5 @@ void ldr_init(void) {
     esp_timer_handle_t timer;
     esp_timer_create(&timer_args, &timer);
     esp_timer_start_periodic(timer, 1000 * 1000); // 1 second in microseconds
+    ESP_LOGI(LDR_TAG, "LDR inited");
 }

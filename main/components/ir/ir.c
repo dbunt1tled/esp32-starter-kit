@@ -12,7 +12,7 @@
 #include "esp_log.h"
 #include "components/bus/bus.h"
 
-// static const char* IR_TAG = "IR";
+static const char* IR_TAG = "IR";
 
 // static void IRAM_ATTR ir_isr_handler(void *arg) {
 //
@@ -67,4 +67,5 @@ void ir_init(void) {
     gpio_config(&cfg);
     // gpio_isr_handler_add(IR_PIN, ir_isr_handler, NULL);
     xTaskCreate(ir_task, "ir_task", 2048, NULL, 5, NULL);
+    ESP_LOGI(IR_TAG, "IR inited");
 }
