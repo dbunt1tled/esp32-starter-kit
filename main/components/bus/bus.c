@@ -59,6 +59,8 @@ void bus_init(bus_cfg_t *cfg) {
     bus_register(ACTION_LDR, ldr_handler);
     bus_register(ACTION_IR, ir_handler);
     bus_register(ACTION_RAIN, rain_handler);
+    bus_register(ACTION_ULTRA, ultra_handler);
+
     xTaskCreate(
         bus_consumer,
         "bus_task",

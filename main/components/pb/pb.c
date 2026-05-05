@@ -62,6 +62,32 @@ void buzzer_tone(const uint32_t freq_hz, const uint32_t duration_ms) {
    ledc_update_duty(LEDC_MODE, LEDC_CHANNEL);
 }
 
+
+void buzzer_play_tone(const uint32_t freq_hz, const uint32_t duration_ms) {
+   if (freq_hz == 0) {
+      ledc_set_duty(LEDC_MODE, LEDC_CHANNEL, 0);
+      ledc_update_duty(LEDC_MODE, LEDC_CHANNEL);
+   } else {
+      ledc_set_freq(LEDC_MODE, LEDC_TIMER, freq_hz);
+      // 50% duty cycle — оптимально для buzzer
+      uint32_t duty = (1 << LEDC_TIMER_10_BIT) / 2;
+      ledc_set_duty(LEDC_MODE, LEDC_CHANNEL, duty);
+      ledc_update_duty(LEDC_MODE, LEDC_CHANNEL);
+   }
+   vTaskDelay(pdMS_TO_TICKS(duration_ms));
+
+   // Заглушить между нотами (зазор ~20 мс)
+   ledc_set_duty(LEDC_MODE, LEDC_CHANNEL, 0);
+   ledc_update_duty(LEDC_MODE, LEDC_CHANNEL);
+   vTaskDelay(pdMS_TO_TICKS(20));
+}
+
+void play_melody(const Note *melody, size_t len) {
+   for (size_t i = 0; i < len; i++) {
+      buzzer_play_tone(melody[i].freq, melody[i].duration);
+   }
+}
+
 void buzzer_rest(const uint32_t duration_ms) {
    vTaskDelay(pdMS_TO_TICKS(duration_ms));
 }

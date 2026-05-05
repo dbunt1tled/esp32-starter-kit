@@ -16,6 +16,7 @@
 #include "components/ir/ir.h"
 #include "components/pb/pb.h"
 #include "components/rain/rain.h"
+#include "components/ultra/ultra.h"
 #include "services/adc/adc.h"
 
 static const char *MAIN_TAG = "Main";
@@ -48,6 +49,7 @@ void app_main(void) {
     adc_service_init();
     ldr_init();
     rain_init();
+    ultra_init();
 
 
     gamma_p();

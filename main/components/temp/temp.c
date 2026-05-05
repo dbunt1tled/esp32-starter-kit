@@ -23,7 +23,7 @@ static void temp_task(void *arg) {
     };
 
     while (true) {
-        if (dht_read_data(DHT_TYPE_DHT11, TEMP_PIN, &humidity, &temperature) == ESP_OK) {
+        if (dht_read_data(DHT_TYPE_AM2301, TEMP_PIN, &humidity, &temperature) == ESP_OK) {
             snprintf(buf, sizeof(buf),"T:%dC H:%d%%", temperature / 10,humidity / 10);
             m.value.text = buf;
         } else {

@@ -14,6 +14,7 @@ typedef enum {
     ACTION_LDR,
     ACTION_IR,
     ACTION_RAIN,
+    ACTION_ULTRA,
 } bus_action_t;
 
 typedef struct {
@@ -34,6 +35,7 @@ typedef struct {
         int val;
         char* text;
         uint8_t val8;
+        float valf;
     } value;
 
 } bus_msg_t;
