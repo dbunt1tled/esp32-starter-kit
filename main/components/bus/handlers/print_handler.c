@@ -69,6 +69,23 @@ void print_handler(const bus_msg_t *msg) {
                 oled_clear_area(40, 0, 16, 16);
             }
 
+            if (OLED_ICON_FIRE & oled.icons.set) {
+                oled_clear_area(60, 0, 16, 16);
+                switch (msg->value.val) {
+                    case 0:
+                        display_draw_icon(60,   0, &ICON_FIRE, true);
+                        break;
+                    case 1:
+                        display_draw_icon(60,   0, &ICON_FIRE_C, true);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if (OLED_ICON_FIRE & oled.icons.clear) {
+                oled_clear_area(60, 0, 16, 16);
+            }
+
             break;
         case OLED_BLOCK_TITLE:
             oled_clear_line(20, TITLE_H);

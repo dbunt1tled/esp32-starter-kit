@@ -15,6 +15,7 @@ typedef enum {
     ACTION_IR,
     ACTION_RAIN,
     ACTION_ULTRA,
+    ACTION_FIRE,
 } bus_action_t;
 
 typedef struct {

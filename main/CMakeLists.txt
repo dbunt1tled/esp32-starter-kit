@@ -25,6 +25,7 @@ idf_component_register(SRCS
         "components/bus/handlers/ir_handler.c"
         "components/bus/handlers/rain_handler.c"
         "components/bus/handlers/ultra_handler.c"
+        "components/bus/handlers/fire_handler.c"
         "components/nvs/nvs.h"
         "components/nvs/nvs.c"
         "components/sntp/sntp.h"
@@ -51,6 +52,8 @@ idf_component_register(SRCS
         "services/adc/adc.c"
         "components/ultra/ultra.h"
         "components/ultra/ultra.c"
+        "components/fire/fire.h"
+        "components/fire/fire.c"
         INCLUDE_DIRS
         "."
         "components/cfg"

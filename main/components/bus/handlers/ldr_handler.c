@@ -10,7 +10,7 @@
 #include "components/bus/bus.h"
 
 
-static const char* LDRH_TAG = "LDR_H";
+// static const char* LDRH_TAG = "LDR_H";
 void ldr_handler(const bus_msg_t *msg) {
     set_contrast(msg->value.val8);
     // ESP_LOGI(LDRH_TAG, "contrast=%d", msg->value.val8);

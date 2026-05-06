@@ -12,6 +12,7 @@
 #include "components/sntp/sntp.h"
 #include "components/temp/temp.h"
 #include "components/cfg/configure.h"
+#include "components/fire/fire.h"
 #include "components/ldr/ldr.h"
 #include "components/ir/ir.h"
 #include "components/pb/pb.h"
@@ -50,6 +51,7 @@ void app_main(void) {
     ldr_init();
     rain_init();
     ultra_init();
+    fire_init();
 
 
     gamma_p();

@@ -13,4 +13,5 @@ void ldr_handler(const bus_msg_t *msg);
 void ir_handler(const bus_msg_t *msg);
 void rain_handler(const bus_msg_t *msg);
 void ultra_handler(const bus_msg_t *msg);
+void fire_handler(const bus_msg_t *msg);
 #endif //ESP_START_KIT_HANDLERS_H

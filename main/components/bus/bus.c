@@ -60,6 +60,7 @@ void bus_init(bus_cfg_t *cfg) {
     bus_register(ACTION_IR, ir_handler);
     bus_register(ACTION_RAIN, rain_handler);
     bus_register(ACTION_ULTRA, ultra_handler);
+    bus_register(ACTION_FIRE, fire_handler);
 
     xTaskCreate(
         bus_consumer,

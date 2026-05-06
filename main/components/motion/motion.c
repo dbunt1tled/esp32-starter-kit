@@ -22,32 +22,32 @@ static void IRAM_ATTR motion_isr_handler(void *arg) {
     };
     bus_send_isr(msg);
 }
-static int prev_level = 0;
-static void pir_polling_task(void *arg)
-{
-    static char response[512];
-    int curr_level = 0;
-
-    while (1) {
-        curr_level = gpio_get_level(MOTION_PIN);
-
-        if (curr_level != prev_level) {
-            if (curr_level == 1) {
-                ESP_LOGI(MOTION_TAG, "[Polling] Движение обнаружено! %d", curr_level);
-                // http_post_req(
-                //     TELEGRAM_URL_SEND_MESSAGE,
-                //     "{\"chat_id\": 307851817, \"text\": \"Motion detected!!!\"}",
-                //     "application/json",
-                //     response,
-                //     sizeof(response)
-//                );
-            }
-            prev_level = curr_level;
-        }
-        ESP_LOGI(MOTION_TAG, "STATE %d", curr_level);
-        vTaskDelay(pdMS_TO_TICKS(2000));
-    }
-}
+// static int prev_level = 0;
+// static void pir_polling_task(void *arg)
+// {
+//     static char response[512];
+//     int curr_level = 0;
+//
+//     while (1) {
+//         curr_level = gpio_get_level(MOTION_PIN);
+//
+//         if (curr_level != prev_level) {
+//             if (curr_level == 1) {
+//                 ESP_LOGI(MOTION_TAG, "[Polling] Движение обнаружено! %d", curr_level);
+//                 // http_post_req(
+//                 //     TELEGRAM_URL_SEND_MESSAGE,
+//                 //     "{\"chat_id\": 307851817, \"text\": \"Motion detected!!!\"}",
+//                 //     "application/json",
+//                 //     response,
+//                 //     sizeof(response)
+// //                );
+//             }
+//             prev_level = curr_level;
+//         }
+//         ESP_LOGI(MOTION_TAG, "STATE %d", curr_level);
+//         vTaskDelay(pdMS_TO_TICKS(2000));
+//     }
+// }
 
 void motion_init(void) {
     const gpio_config_t io_conf = {

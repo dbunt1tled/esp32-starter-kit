@@ -13,8 +13,7 @@
 
 static const char *RAIN_TAG = "RAIN";
 
-static void rain_task(void *arg)
-{
+static void rain_task(void *arg) {
     while (true) {
         const int rain_mv = adc_service_read_mv(RAIN_PIN);
 

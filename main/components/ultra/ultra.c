@@ -62,7 +62,7 @@ static void ultra_task(void *arg) {
             ESP_LOGI(ULTRA_TAG, "Distance: %.2f cm", distance);
         }
 
-        vTaskDelay(pdMS_TO_TICKS(500));
+        vTaskDelay(pdMS_TO_TICKS(1500));
     }
 }
 

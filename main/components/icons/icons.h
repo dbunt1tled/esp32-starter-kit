@@ -29,5 +29,7 @@ extern const icon_t ICON_SIGNAL_NO;
 extern const icon_t ICON_SUN;
 extern const icon_t ICON_CLOUD_RAIN;
 extern const icon_t ICON_RAIN;
+extern const icon_t ICON_FIRE;
+extern const icon_t ICON_FIRE_C;
 
 #endif //ESP_START_KIT_ICONS_H

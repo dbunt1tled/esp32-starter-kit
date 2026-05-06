@@ -33,6 +33,7 @@ typedef enum {
     OLED_ICON_BLE  = 1 << 1,
     OLED_ICON_BATT = 1 << 2,
     OLED_ICON_RAIN = 1 << 3,
+    OLED_ICON_FIRE = 1 << 4,
 } oled_icon_t;
 
 typedef struct {
