@@ -23,7 +23,7 @@ static void rain_task(void *arg) {
         };
         // ESP_LOGI("RAIN","raw=%d filtered=%d\n", rain, rain_mv);
         bus_send(msg);
-        vTaskDelay(pdMS_TO_TICKS(1000));
+        vTaskDelay(pdMS_TO_TICKS(5000));
     }
 }
 

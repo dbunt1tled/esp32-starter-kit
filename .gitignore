@@ -76,6 +76,12 @@ Desktop.ini
 *.workspace # General workspace files, can be from various tools
 *.suo       # Visual Studio Solution User Options
 *.sln.docstates # Visual Studio
+
+# Local configuration with secrets (WiFi creds, API tokens)
+main/components/cfg/configure_loc.h
+
+# Claude Code local settings (contains API keys)
+.claude/settings.local.json
 ### C++ template
 # Prerequisites
 *.d

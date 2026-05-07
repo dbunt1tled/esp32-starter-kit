@@ -54,9 +54,9 @@ static void led_task(void *arg)
 {
     uint32_t notified;
 
-    while (1) {
+    while (true) {
 
-        xTaskNotifyWait(0, UINT32_MAX, &notified, pdMS_TO_TICKS(20));
+        xTaskNotifyWait(0, UINT32_MAX, &notified, pdMS_TO_TICKS(200));
 
         int64_t now = esp_timer_get_time() / 1000;
 

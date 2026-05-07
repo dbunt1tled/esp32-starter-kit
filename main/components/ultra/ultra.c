@@ -46,7 +46,7 @@ static float hcsr04_measure_cm(void) {
 }
 
 static void ultra_task(void *arg) {
-    while (1) {
+    while (true) {
         const float distance = hcsr04_measure_cm();
 
         if (distance > 0 && distance < 30) {
@@ -62,7 +62,7 @@ static void ultra_task(void *arg) {
             ESP_LOGI(ULTRA_TAG, "Distance: %.2f cm", distance);
         }
 
-        vTaskDelay(pdMS_TO_TICKS(1500));
+        vTaskDelay(pdMS_TO_TICKS(5000));
     }
 }
 

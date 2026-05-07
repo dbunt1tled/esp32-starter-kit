@@ -30,7 +30,7 @@ static void IRAM_ATTR gpio_isr_handler(void *arg) {
 
 static void button_task(void *arg) {
     uint32_t notified;
-    while (1) {
+    while (true) {
         xTaskNotifyWait(0, UINT32_MAX, &notified, pdMS_TO_TICKS(50));
         const int64_t now = esp_timer_get_time() / 1000;
         for (int gpio = 0; gpio < MAX_GPIO; gpio++) {

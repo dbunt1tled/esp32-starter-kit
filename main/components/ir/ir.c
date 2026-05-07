@@ -49,7 +49,7 @@ static void ir_task(void *arg)
             };
             bus_send(msg);
         }
-        vTaskDelay(pdMS_TO_TICKS(25));
+        vTaskDelay(pdMS_TO_TICKS(2500));
     }
 }
 

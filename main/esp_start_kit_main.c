@@ -27,6 +27,7 @@ void app_main(void) {
     ESP_LOGI(MAIN_TAG, "Version: %s\n", PROJECT_VER);
 
     gpio_install_isr_service(0);
+    adc_service_init();
     ESP_LOGI(MAIN_TAG, "isr_installed");
     button_init(BUTTON_PIN, led_handler);
     oled_init();
@@ -47,12 +48,11 @@ void app_main(void) {
     motion_init();
     pb_init();
     ir_init();
-    adc_service_init();
+
     ldr_init();
     rain_init();
     ultra_init();
     fire_init();
-
 
     gamma_p();
     while (true) {

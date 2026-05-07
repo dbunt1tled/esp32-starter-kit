@@ -42,7 +42,7 @@ static void bus_monitor(void *arg) {
         if (stack < 100) {
             ESP_LOGW(BUS_TAG, "Queue task stack low: %d bytes", stack);
         }
-        vTaskDelay(pdMS_TO_TICKS(3000));
+        vTaskDelay(pdMS_TO_TICKS(5000));
     }
 }
 

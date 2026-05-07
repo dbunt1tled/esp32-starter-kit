@@ -28,7 +28,7 @@ static void fire_task(void *arg) {
             .value = {.val = fire_mv}
         };
         bus_send(msg);
-        vTaskDelay(pdMS_TO_TICKS(1500));
+        vTaskDelay(pdMS_TO_TICKS(5000));
     }
 }
 

@@ -2,26 +2,29 @@
 
 🚀 **IoT Development Platform for ESP32-S3 Microcontrollers**
 
-A comprehensive, modular IoT development environment featuring hardware abstraction, sensor integration, and real-time data processing capabilities.
+A modular IoT development environment featuring sensor integration, OLED display, WiFi connectivity, and event-driven architecture.
 
 ---
 
 ## 📋 Overview
 
-The ESP32 Starter Kit is an advanced IoT development platform designed for ESP32-S3 microcontrollers. Built for real-time IoT applications, it provides a modular architecture supporting multiple sensors, wireless connectivity, and display capabilities.
+The ESP32 Starter Kit is a comprehensive IoT platform built for ESP32-S3 microcontrollers. It provides a component-based architecture with an event bus system for inter-component communication, supporting multiple sensors, wireless connectivity, and real-time data processing.
 
 ---
 
 ## ✨ Key Features
 
-- **🔧 Hardware Abstraction**: Efficient low-power microcontroller support
-- **🌡️ Multi-Sensor Integration**: Temperature, humidity, light, motion, and IR sensors
-- **📱 OLED Display**: High-contrast display with centered text output
-- **🌐 Wireless Connectivity**: WiFi integration with HTTP client capabilities
-- **⏰ Time Synchronization**: SNTP/NTP integration for accurate timestamps
-- **🔍 Service Discovery**: MDNS support for local network discovery
-- **🎛️ Modular Architecture**: Component-based design for easy customization
-- **📊 Event Bus System**: Efficient inter-component communication
+- **🔧 Hardware Abstraction**: ESP32-S3 low-power microcontroller support
+- **🌡️ Multi-Sensor Integration**: Temperature, fire, rain, light, motion, ultrasonic, IR sensors
+- **🔊 Audio Output**: Buzzer with melody playback (pb component)
+- **📱 OLED Display**: SSD1306 I2C display with status indicators
+- **🌐 Wireless Connectivity**: WiFi with HTTP client and Telegram integration
+- **⏰ Time Synchronization**: SNTP/NTP integration
+- **🔍 Service Discovery**: MDNS support (dnsm component)
+- **🎛️ Modular Architecture**: Component-based design with event bus system
+- **📊 Event Bus System**: Queue-based inter-component messaging
+- **💾 Persistent Storage**: NVS for configuration persistence
+- **🎚️ PWM LED Control**: LED dimming and effects
 
 ---
 
@@ -30,83 +33,72 @@ The ESP32 Starter Kit is an advanced IoT development platform designed for ESP32
 ### Sensors & Inputs
 | Component | Function | Status |
 |-----------|----------|--------|
-| **Temperature Sensor** | DHT-based temperature readings | ✅ Active |
-| **Humidity Sensor** | DHT-based humidity monitoring | ✅ Active |
-| **LDR Sensor** | Light/dark ratio detection | ✅ Active |
-| **Motion Sensor** | PIR-based movement detection | ⚠️ Configurable |
-| **IR Receiver** | Infrared signal reception | ✅ Active |
-| **Button Input** | User interaction handling | ✅ Active |
+| **temp** | Temperature readings | ✅ Active |
+| **fire** | Fire/smoke detection | ✅ Active |
+| **rain** | Rain detection | ✅ Active |
+| **ultra** | Ultrasonic distance measurement | ✅ Active |
+| **ldr** | Light/dark detection | ✅ Active |
+| **motion** | PIR motion detection | ✅ Active |
+| **ir** | Infrared receiver | ✅ Active |
+| **button** | User button input | ✅ Active |
 
 ### Output & Interface
 | Component | Function | Features |
 |-----------|----------|----------|
-| **OLED Display** | Visual output interface | Centered text, contrast control |
-| **LED Indicators** | Status and feedback | PWM support available |
-| **HTTP Client** | Web service integration | RESTful API communication |
+| **oled** | SSD1306 I2C display | Status icons, text output |
+| **led** | LED indicators | GPIO control |
+| **led_pwm** | LED PWM control | Dimming, effects |
+| **pb** | Buzzer/Piezo | Melody playback |
+| **http** | HTTP client | RESTful API, Telegram |
 
 ### System Services
 | Service | Purpose | Implementation |
 |---------|---------|----------------|
-| **WiFi Manager** | Network connectivity | Automatic connection handling |
-| **NVS Storage** | Non-volatile data storage | Configuration persistence |
-| **SNTP Client** | Time synchronization | NTP server integration |
-| **Event Bus** | Component communication | Queue-based messaging |
-| **MDNS Service** | Network discovery | Local service advertising |
-
----
-
-## 🎥 Video Demonstration
-
-### Hardware in Action
-
-Watch the ESP32 Starter Kit in action with sensor readings and display output:
-![Demo](assets/esp32_s.gif)
-[📹 View Demo Video](assets/esp32.mp4)
-
-> **Note**: The video demonstrates real-time temperature and humidity sensor readouts on the OLED display, showcasing the kit's data acquisition and visualization capabilities.
+| **wifi** | Network connectivity | Automatic connection handling |
+| **nvs** | Non-volatile storage | Configuration persistence |
+| **sntp** | Time synchronization | NTP server integration |
+| **bus** | Event bus | Queue-based messaging |
+| **dnsm** | Network discovery | MDNS service advertising |
+| **adc** | ADC services | Analog reading utilities |
+| **move_avg** | Data smoothing | Moving average filter |
 
 ---
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- ESP-IDF development environment
+- ESP-IDF v6.0+ development environment (IDF_PATH must be set)
 - ESP32-S3 development board
-- Required sensors and peripherals
+- Sensors and peripherals per your configuration
 
 ### Installation
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/esp-start-kit/esp_start_kit.git
-   cd esp_start_kit
+   git clone https://github.com/dbunt1tled/esp32-starter-kit.git
+   cd esp32-starter-kit
    ```
 
-2. **Configure the project**
+2. **Set up ESP-IDF environment**
    ```bash
-   # Create configuration file
-   touch main/components/cfg/configure.h
-   
-   # Edit configuration with your WiFi credentials and settings
-   # Configure: WIFI_SSID, WIFI_PASSWORD, sensor pins, etc.
+   # Adjust path to your ESP-IDF installation
+   export IDF_PATH=/Users/admin/.espressif/v6.0/esp-idf
+   . $IDF_PATH/export.sh
    ```
 
-3. **Build and flash**
+3. **Configure local settings**
    ```bash
-   # Build the project
+   # Create local config (never commit this file)
+   cp main/components/cfg/configure_loc.h.example main/components/cfg/configure_loc.h
+   # Edit with your WiFi credentials and API tokens
+   # configure.h includes configure_loc.h when USE_LOCAL_CONFIG is defined
+   ```
+
+4. **Build and flash**
+   ```bash
    idf.py build
-   
-   # Flash to device
    idf.py flash monitor
    ```
-
-### Configuration
-
-Edit `main/components/cfg/configure.h` to customize:
-- WiFi credentials
-- GPIO pin assignments
-- Sensor configurations
-- Display settings
 
 ---
 
@@ -115,33 +107,41 @@ Edit `main/components/cfg/configure.h` to customize:
 ```
 esp_start_kit/
 ├── README.md                    # This documentation
-├── CMakeLists.txt              # Main build configuration
-├── sdkconfig                   # ESP-IDF configuration
-├── assets/                     # Media files
-│   └── esp32.mp4               # Demo video
-├── main/                       # Main application
-│   ├── esp_start_kit_main.c    # Application entry point
-│   ├── CMakeLists.txt          # Component build config
-│   └── components/             # Hardware components
-│       ├── bus/               # Event bus system
-│       ├── button/            # Button handling
-│       ├── cfg/               # Configuration management
-│       ├── dnsm/              # MDNS service
-│       ├── http/              # HTTP client
-│       ├── icons/             # Display icons
-│       ├── ir/                # IR receiver
-│       ├── ldr/               # Light sensor
-│       ├── led/               # LED control
-│       ├── led_pwm/           # PWM LED control
-│       ├── motion/            # Motion detection
-│       ├── nvs/               # Non-volatile storage
-│       ├── oled/              # OLED display
-│       ├── sntp/              # Time synchronization
-│       ├── temp/              # Temperature sensor
-│       └── wifi/              # WiFi management
-├── scripts/                    # Utility scripts
-│   └── bump_version.py        # Version management
-└── version.txt                 # Project version
+├── CMakeLists.txt               # Main build configuration
+├── sdkconfig                    # ESP-IDF configuration
+├── version.txt                  # Project version (auto-bumped on build)
+├── .clang-format                # Code formatting rules
+├── main/                        # Main application
+│   ├── esp_start_kit_main.c     # Application entry point
+│   ├── CMakeLists.txt           # Component build config
+│   ├── components/              # Hardware components
+│   │   ├── bus/                # Event bus system
+│   │   ├── button/             # Button handling
+│   │   ├── cfg/                # Configuration (configure.h, configure_loc.h)
+│   │   ├── dnsm/               # MDNS service
+│   │   ├── fire/               # Fire sensor
+│   │   ├── http/               # HTTP client
+│   │   ├── icons/              # Display icons
+│   │   ├── ir/                 # IR receiver
+│   │   ├── ldr/                # Light sensor
+│   │   ├── led/                # LED control
+│   │   ├── led_pwm/            # PWM LED control
+│   │   ├── mbus/               # Modbus (or measurement bus)
+│   │   ├── motion/             # Motion detection
+│   │   ├── nvs/                # Non-volatile storage
+│   │   ├── oled/               # OLED display
+│   │   ├── pb/                 # Buzzer melody playback
+│   │   ├── rain/               # Rain sensor
+│   │   ├── sntp/               # Time synchronization
+│   │   ├── temp/               # Temperature sensor
+│   │   ├── ultra/              # Ultrasonic sensor
+│   │   └── wifi/               # WiFi management
+│   └── services/                # Utility services
+│       ├── adc/                # ADC utilities
+│       └── move_avg/           # Moving average filter
+├── scripts/                     # Utility scripts
+│   └── bump_version.py         # Auto-version bump on build
+└── managed_components/          # ESP-IDF component manager dependencies
 ```
 
 ---
@@ -150,20 +150,14 @@ esp_start_kit/
 
 ### Build Commands
 ```bash
-# Clean build
-idf.py clean
+# Load ESP-IDF environment first (required)
+# export IDF_PATH=/Users/admin/.espressif/v6.0/esp-idf
+# . $IDF_PATH/export.sh
 
-# Build project
-idf.py build
-
-# Flash and monitor
-idf.py flash monitor
-
-# Build only
-idf.py app
-
-# Menu configuration
-idf.py menuconfig
+idf.py clean              # Clean build artifacts
+idf.py build              # Build project (auto-bumps version via bump_version.py)
+idf.py flash monitor      # Flash and open serial monitor
+idf.py menuconfig         # Interactive configuration
 ```
 
 ### Dependencies
@@ -178,27 +172,47 @@ The project uses ESP-IDF components and requires:
 
 ---
 
-## 🔧 Hardware Setup
+## 🔧 Configuration
+
+Configuration is managed in `main/components/cfg/`:
+
+- **configure.h** - Main configuration, includes `configure_loc.h` when `USE_LOCAL_CONFIG` is defined
+- **configure_loc.h** - Local overrides (WiFi credentials, API tokens) - **never commit this file**
+
+To customize:
+1. Create `configure_loc.h` with your local settings
+2. Ensure `USE_LOCAL_CONFIG` is defined in `configure.h` (enabled by default)
+3. Add your WiFi credentials, Telegram tokens, and pin assignments
+
+---
+
+## 🔩 Hardware Setup
 
 ### Required Components
 - ESP32-S3 development board
-- DHT22/DHT11 temperature & humidity sensor
+- Temperature sensor
+- Fire/smoke sensor
+- Rain sensor
+- Ultrasonic distance sensor (HC-SR04 or compatible)
 - LDR (Light Dependent Resistor)
 - PIR motion sensor
 - IR receiver module
-- OLED display (SSD1306 or compatible)
+- OLED display (SSD1306 I2C)
 - Push button
 - LED indicators
+- Buzzer/Piezo speaker
 
 ### Pin Configuration
 Default pin assignments (configurable in `configure.h`):
 - Button: GPIO 0
 - LED: GPIO 2
-- DHT Sensor: GPIO 4
-- LDR: ADC1_CH0 (GPIO 1)
+- Temperature Sensor: GPIO 4
+- LDR: ADC1 channel
 - PIR Motion: GPIO 5
 - IR Receiver: GPIO 6
-- OLED Display: I2C SDA/CLK pins
+- Ultrasonic Trigger/Echo: Configurable
+- OLED Display: I2C SDA/SCL pins
+- Buzzer: PWM-capable GPIO
 
 ---
 
@@ -208,13 +222,13 @@ Default pin assignments (configurable in `configure.h`):
 The kit uses a centralized event bus for component communication:
 - **Queue-based messaging** for reliable data transfer
 - **Handler registration** for modular event processing
-- **Configurable delay** and queue size for performance tuning
+- **Configurable delays** and queue size for performance tuning
 
 ### Component Lifecycle
 1. **Initialization**: Hardware setup and configuration
 2. **Registration**: Event handlers registered with bus
 3. **Processing**: Continuous monitoring and data collection
-4. **Communication**: Event-driven data sharing
+4. **Communication**: Event-driven data sharing via bus
 
 ---
 
@@ -229,18 +243,17 @@ idf.py monitor
 idf.py menuconfig → Component config → Log output
 ```
 
-### Testing Features
-- Sensor data validation
-- Display output verification
-- Network connectivity testing
-- Event bus functionality
+### Version Management
+Version is tracked in `version.txt` (format: `0.0.1+build-NN`).
+The version is automatically bumped on each build via `scripts/bump_version.py`.
+
+Current version: **0.0.1+build-19**
 
 ---
 
 ## 🌐 External Resources
 
-- **Project Tracking**: [Linear Dashboard](https://linear.app/esp-start-kit)
-- **Documentation**: Component-specific docs in `main/components/`
+- **Documentation**: Component-specific docs in `main/components/<name>/`
 - **ESP-IDF Guide**: [Official ESP-IDF Documentation](https://docs.espressif.com/projects/esp-idf/en/latest/)
 
 ---
@@ -250,52 +263,46 @@ idf.py menuconfig → Component config → Log output
 Contributions are welcome! Please:
 1. Fork the repository
 2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
+3. Follow the coding style (4-space indent, snake_case, `//` comments)
+4. Test thoroughly on hardware
 5. Submit a pull request
 
-### Development Guidelines
-- Follow ESP-IDF coding standards
-- Add appropriate logging
-- Update documentation
-- Test on hardware when possible
+### Commit Message Style
+Follow the existing convention:
+- `✨ feat(...)` - New features
+- `🔧 feat(...)` - Configuration/system features
+- `♻️ refactor(...)` - Code refactoring
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License (LICENSE file to be added).
 
 ---
 
 ## 👥 Development Team
 
 - **Deni** - Main Developer & Architecture
-- **IoT Team** - Hardware & Software Design
-
----
-
-## 📈 Version History
-
-- **Current**: See `version.txt` for latest version
-- **Release Branch**: `release-2026-03-05` for mobile features
 
 ---
 
 ## 🔍 Troubleshooting
 
 ### Common Issues
-- **WiFi Connection**: Check credentials and network availability
+- **WiFi Connection**: Check credentials in `configure_loc.h` and network availability
 - **Sensor Readings**: Verify pin connections and power supply
-- **Display Issues**: Check I2C connections and contrast settings
-- **Build Errors**: Ensure ESP-IDF environment is properly configured
+- **Display Issues**: Check I2C connections and address (typically 0x3C)
+- **Build Errors**: Ensure ESP-IDF environment is properly loaded (IDF_PATH set)
+- **Version Bump Fails**: Check `scripts/bump_version.py` is executable
 
 ### Support
 For issues and questions:
-- Check component documentation in `main/components/`
+- Check component documentation in `main/components/<name>/`
 - Review ESP-IDF official documentation
 - Open an issue on the project repository
 
 ---
 
-*Built with ❤️ for the IoT community* 
+*Current Version: 0.0.1+build-19*
+*Last Updated: 2026-05-07*
